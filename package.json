@@ -1,42 +1,44 @@
 {
-  "name": "jsformula",
-  "version": "1.0.0",
-  "description": "Javascript formula evaluator",
-  "main": "dist/index.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Devil7DK/JSFormula.git"
-  },
-  "keywords": [
-    "formula",
-    "eval",
-    "calculate",
-    "javascript"
-  ],
-  "author": "Dineshkumar T (Devil7DK)",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/Devil7DK/JSFormula/issues"
-  },
-  "homepage": "https://github.com/Devil7DK/JSFormula#readme",
-  "devDependencies": {
-    "@types/jest": "^27.0.2",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-simple-import-sort": "^7.0.0",
-    "jest": "^27.2.4",
-    "prettier": "^2.4.1",
-    "ts-jest": "^27.0.5",
-    "typescript": "^4.4.3"
-  }
+    "name": "jsformula",
+    "version": "1.0.0",
+    "description": "Javascript formula evaluator",
+    "main": "dist/index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "build": "tsc",
+        "test": "jest",
+        "lint": "eslint src/**/*.ts --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/Devil7DK/JSFormula.git"
+    },
+    "keywords": [
+        "formula",
+        "eval",
+        "calculate",
+        "javascript"
+    ],
+    "author": "Dineshkumar T (Devil7DK)",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/Devil7DK/JSFormula/issues"
+    },
+    "homepage": "https://github.com/Devil7DK/JSFormula#readme",
+    "devDependencies": {
+        "@types/jest": "^27.0.2",
+        "@typescript-eslint/eslint-plugin": "^4.33.0",
+        "@typescript-eslint/parser": "^4.33.0",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.24.2",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-simple-import-sort": "^7.0.0",
+        "jest": "^27.2.4",
+        "prettier": "^2.4.1",
+        "ts-jest": "^27.0.5",
+        "typescript": "^4.4.3"
+    }
 }
