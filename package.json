@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/Devil7DK/JSFormula/issues"
   },
-  "homepage": "https://github.com/Devil7DK/JSFormula#readme"
+  "homepage": "https://github.com/Devil7DK/JSFormula#readme",
+  "devDependencies": {
+    "typescript": "^4.4.3"
+  }
 }
