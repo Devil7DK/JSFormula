@@ -1,0 +1,28 @@
+{
+  "name": "jsformula",
+  "version": "1.0.0",
+  "description": "Javascript formula evaluator",
+  "main": "dist/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Devil7DK/JSFormula.git"
+  },
+  "keywords": [
+    "formula",
+    "eval",
+    "calculate",
+    "javascript"
+  ],
+  "author": "Dineshkumar T (Devil7DK)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Devil7DK/JSFormula/issues"
+  },
+  "homepage": "https://github.com/Devil7DK/JSFormula#readme"
+}
