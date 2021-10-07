@@ -4,22 +4,25 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "baseUrl": "./",
+        "jsx": "react",
         "paths": {
             "~/*": [
                 "./src/*"
+            ],
+            "#/*": [
+                "./demo/*"
             ]
         },
         "outDir": "./dist",
         "newLine": "lf",
-        "declaration": true,
-        "declarationDir": "./dist",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true
     },
     "include": [
-        "src"
+        "src",
+        "demo"
     ],
     "exclude": [
         "node_modules"
