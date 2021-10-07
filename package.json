@@ -7,9 +7,17 @@
         "test": "tests"
     },
     "scripts": {
-        "build": "tsc",
+        "start": "ts-node -T fuse",
+        "clean:lib": "rimraf -r lib",
+        "clean:demo": "rimraf -r dist",
+        "clean": "npm run clean:lib && npm run clean:demo",
+        "build:lib": "npm run clean:lib && tsc -p tsconfig.lib.json",
+        "build:demo": "ts-node -T fuse dist",
+        "build": "npm run build:lib && npm run build:demo",
         "test": "jest",
-        "lint": "eslint src/**/*.ts --fix"
+        "lint": "npm run lint:lib && npm run lint:demo",
+        "lint:lib": "eslint src/**/*.ts --fix",
+        "lint:demo": "eslint demo/**/*.{ts,tsx} --fix"
     },
     "repository": {
         "type": "git",
