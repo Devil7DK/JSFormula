@@ -1,0 +1,31 @@
+name: Deploy Demo to Github Pages
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "demo/**"
+      - "src/**"
+      - "fuse.ts"
+      - "package*.json"
+      - "tsconfig*.json"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Install dependencies 🔧
+        run: npm install
+
+      - name: Build demo 🏭
+        run: npm run build:demo
+
+      - name: Deploy to Github pages 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: dist
