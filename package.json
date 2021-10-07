@@ -12,12 +12,13 @@
         "clean:demo": "rimraf -r dist",
         "clean": "npm run clean:lib && npm run clean:demo",
         "build:lib": "npm run clean:lib && tsc -p tsconfig.lib.json",
-        "build:demo": "ts-node -T fuse dist",
+        "build:demo": "ts-node -T fuse dist && npm run minify:demo",
         "build": "npm run build:lib && npm run build:demo",
         "test": "jest",
         "lint": "npm run lint:lib && npm run lint:demo",
         "lint:lib": "eslint src/**/*.ts --fix",
-        "lint:demo": "eslint demo/**/*.{ts,tsx} --fix"
+        "lint:demo": "eslint demo/**/*.{ts,tsx} --fix",
+        "minify:demo": "html-minifier --collapse-whitespace --minify-css true dist/index.html --output dist/index.html"
     },
     "repository": {
         "type": "git",
