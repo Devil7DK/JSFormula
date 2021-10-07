@@ -7,6 +7,7 @@ class Context {
             target: 'browser',
             entry: 'demo/index.tsx',
             webIndex: {
+                publicPath: './',
                 template: 'demo/index.html',
             },
             cache: true,
