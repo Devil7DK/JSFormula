@@ -1,23 +1,23 @@
 [
   {
-    "absPath": "/home/runner/work/JSFormula/JSFormula/dist/app.06d061c59.js",
-    "browserPath": "./app.06d061c59.js",
-    "relativePath": "app.06d061c59.js",
+    "absPath": "/home/runner/work/JSFormula/JSFormula/dist/app.01d7862e4.js",
+    "browserPath": "./app.01d7862e4.js",
+    "relativePath": "app.01d7862e4.js",
     "type": "js",
     "webIndexed": true
   },
   {
-    "absPath": "/home/runner/work/JSFormula/JSFormula/dist/vendor.01d775122.js",
-    "browserPath": "./vendor.01d775122.js",
-    "relativePath": "vendor.01d775122.js",
-    "type": "js",
-    "webIndexed": true
-  },
-  {
-    "absPath": "/home/runner/work/JSFormula/JSFormula/dist/styles/styles.05bc41983.css",
-    "browserPath": "./styles/styles.05bc41983.css",
-    "relativePath": "styles/styles.05bc41983.css",
+    "absPath": "/home/runner/work/JSFormula/JSFormula/dist/styles/styles.14ed81e1.css",
+    "browserPath": "./styles/styles.14ed81e1.css",
+    "relativePath": "styles/styles.14ed81e1.css",
     "type": "css",
+    "webIndexed": true
+  },
+  {
+    "absPath": "/home/runner/work/JSFormula/JSFormula/dist/vendor.04a479b1e.js",
+    "browserPath": "./vendor.04a479b1e.js",
+    "relativePath": "vendor.04a479b1e.js",
+    "type": "js",
     "webIndexed": true
   }
 ]
