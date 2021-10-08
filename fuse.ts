@@ -26,11 +26,11 @@ task('default', async (ctx) => {
 task('preview', async (ctx) => {
     ctx.runServer = true;
     const fuse = ctx.getConfig();
-    await fuse.runProd();
+    await fuse.runProd({ uglify: false });
 });
 
 task('dist', async (ctx) => {
     ctx.runServer = false;
     const fuse = ctx.getConfig();
-    await fuse.runProd();
+    await fuse.runProd({ uglify: false });
 });
