@@ -16,7 +16,32 @@
         "simple-import-sort"
     ],
     "rules": {
-        "simple-import-sort/imports": "error",
+        "simple-import-sort/imports": [
+            "error",
+            {
+                // The default grouping, but in reverse.
+                "groups": [
+                    [
+                        "^\\u0000"
+                    ],
+                    [
+                        "^@?\\w"
+                    ],
+                    [
+                        "^"
+                    ],
+                    [
+                        "^prism"
+                    ],
+                    [
+                        "^\\u0000prismjs\\/components"
+                    ],
+                    [
+                        "^\\."
+                    ]
+                ],
+            }
+        ],
         "simple-import-sort/exports": "error",
         "import/first": "error",
         "import/newline-after-import": "error",
