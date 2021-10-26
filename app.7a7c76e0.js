@@ -71,7 +71,9 @@ var react_1 = __fusereq(3);
 var react_1d = __fuse.dt(react_1);
 exports.Intro = () => react_1d.default.createElement("section", {
   id: "intro"
-}, react_1d.default.createElement("h1", null, "JS Formula"), react_1d.default.createElement("p", null, "\n            JS Formula is Javascript utility that enables formula evaluation\n            without the use of eval(). Users can perform evaluation on JSON\n            objects using the built in mathmatical opperators +, - , / and * as\n            well as define custom functions that the evaluator can use.\n        "), react_1d.default.createElement("a", {
+}, react_1d.default.createElement("h1", {
+  className: "title"
+}, "JS Formula"), react_1d.default.createElement("p", null, "\n            JS Formula is Javascript utility that enables formula evaluation\n            without the use of eval(). Users can perform evaluation on JSON\n            objects using the built in mathmatical opperators +, - , / and * as\n            well as define custom functions that the evaluator can use.\n        "), react_1d.default.createElement("a", {
   href: "#tryit"
 }, "Try it out!"));
 
@@ -668,4 +670,4 @@ exports.TokenType = TokenType;
 
 }
 })
-//# sourceMappingURL=app.01d7862e4.js.map
+//# sourceMappingURL=app.7a7c76e0.js.map
