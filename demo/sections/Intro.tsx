@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Intro: React.FC = () => (
     <section id="intro">
-        <h1>JS Formula</h1>
+        <h1 className="title">JS Formula</h1>
         <p>
             JS Formula is Javascript utility that enables formula evaluation
             without the use of eval(). Users can perform evaluation on JSON
