@@ -94,8 +94,6 @@ describe('Test with variables', function () {
 });
 
 describe('Test with Functions', function () {
-    const calculator = new JSFormulaCalculator();
-
     const functions: CustomFunctions = {
         sin: function (x: number) {
             return Math.sin(x);
@@ -114,12 +112,14 @@ describe('Test with Functions', function () {
         },
     };
 
+    const calculator = new JSFormulaCalculator({
+        functions,
+    });
+
     const obj = {
         x: 5,
         a: [1, 2, 3, 4],
     };
-
-    calculator.setFunctions(functions);
 
     it('Formula 1 test', function () {
         expect(functions.count(obj.a)).toEqual(calculator.calculate('count({a})', obj));
@@ -130,7 +130,9 @@ describe('Test with Functions', function () {
     });
 
     it('Formula 1 test', function () {
-        expect(Math.pow(functions.sin(obj.x), 2) + Math.pow(functions.cos(obj.x), 2)).toEqual(calculator.calculate('sin({x}) ^ 2 + cos({x}) ^ 2', obj));
+        expect(Math.pow(functions.sin(obj.x), 2) + Math.pow(functions.cos(obj.x), 2)).toEqual(
+            calculator.calculate('sin({x}) ^ 2 + cos({x}) ^ 2', obj)
+        );
     });
 });
 

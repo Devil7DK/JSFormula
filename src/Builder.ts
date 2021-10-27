@@ -1,43 +1,39 @@
 import { TokenType } from './enums';
 import { Operators } from './Operators';
-import { CustomFunctions, OperatorToken, Token } from './types';
+import { CustomFunctions, JSFormulaOptions, OperatorToken, Token } from './types';
 import { findClosingParan, findParameters, getFirstRegex } from './Utils';
 
 export class Builder {
-    private functions: CustomFunctions = {};
-    private functionRegex: RegExp | null = null;
+    private functions: CustomFunctions;
+    private functionRegex: RegExp | null;
 
-    private variableOpen = '{'; // TODO: Add options
-    private variableEnd = '}'; // TODO: Add options
-    private variableRegex = new RegExp('^' + this.variableOpen + '.*?' + this.variableEnd);
-    private opporatorRegex = /^\+|^-|^\/|^\*|^\^/;
+    private readonly variableOpen: string;
+    private readonly variableEnd: string;
+    private readonly variableRegex: RegExp;
 
-    private cacheEnabled = true; // TODO: Add options
-    private cache: Record<string, Token> = {};
+    private readonly opporatorRegex: RegExp;
 
-    /**
-     *	Sets the functions that can be used in the formulas
-     *
-     *	@method setFunctions
-     *	@param {Object} newFunctions A map of function names to functions
-     */
-    public setFunctions(newFunctions: CustomFunctions): void {
-        const functionRegexs = [];
-        let regexString: string;
+    private readonly cacheEnabled: boolean;
+    private readonly cache: Record<string, Token>;
 
-        this.functions = newFunctions;
+    public constructor(options?: JSFormulaOptions) {
+        this.cacheEnabled = options?.cache || true;
+        this.functions = options?.functions || {};
+        this.variableOpen = options?.variableOpen || '{';
+        this.variableEnd = options?.variableEnd || '}';
 
-        for (const prop in this.functions) {
-            if (Object.prototype.hasOwnProperty.call(this.functions, prop)) {
-                functionRegexs.push('^' + prop + '\\(');
-            }
-        }
+        this.cache = {};
+        this.opporatorRegex = /^\+|^-|^\/|^\*|^\^/;
+        this.variableRegex = new RegExp('^' + this.variableOpen + '.*?' + this.variableEnd);
 
-        if (!functionRegexs) {
-            this.functionRegex = null;
+        if (Object.keys(this.functions).length > 0) {
+            this.functionRegex = new RegExp(
+                Object.keys(this.functions)
+                    .map((name) => `^${name}\\(`)
+                    .join('|')
+            );
         } else {
-            regexString = functionRegexs.join('|');
-            this.functionRegex = new RegExp(regexString);
+            this.functionRegex = null;
         }
     }
 
@@ -46,7 +42,7 @@ export class Builder {
      *
      *	@param {String} input The formula
      */
-    public tokenize(input: string): Token[] {
+    private tokenize(input: string): Token[] {
         const tokens: Token[] = [];
 
         let curIndex = 0,

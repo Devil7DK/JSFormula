@@ -1,6 +1,6 @@
 import { Builder } from './Builder';
 import { Evaluator } from './Evaluator';
-import { CustomFunctions } from './types';
+import { CustomFunctions, JSFormulaOptions } from './types';
 
 /**
  *	This is an object that has one method, noConflict. No conflict is used to return
@@ -12,8 +12,8 @@ export class JSFormulaCalculator {
     private builder: Builder;
     private evaluator: Evaluator;
 
-    constructor() {
-        this.builder = new Builder();
+    constructor(options?: JSFormulaOptions) {
+        this.builder = new Builder(options);
         this.evaluator = new Evaluator();
     }
 
@@ -43,16 +43,6 @@ export class JSFormulaCalculator {
         return (object: Record<string, unknown>) => {
             return this.evaluator.evalTree(tree, object) as number; // TODO: Set correct typing
         };
-    }
-
-    /**
-     *	Sets the functions that can be used in the formulas
-     *
-     *	@method setFunctions
-     *	@param {Object} newFunctions A map of function names to functions
-     */
-    public setFunctions(newFunctions: CustomFunctions): void {
-        this.builder.setFunctions(newFunctions);
     }
 }
 
