@@ -38,14 +38,11 @@ const functions: CustomFunctions = {
     },
 };
 
-const calculator = new JSFormulaCalculator();
-calculator.setFunctions(functions);
+const calculator = new JSFormulaCalculator({ functions });
 
 export const TryIt: React.FC = () => {
     const [jsonInput, setJsonInput] = useState<string>('{"a":[1,2,3,4]}');
-    const [formulaInput, setFormulaInput] = useState<string>(
-        'sum({a}) / len({a})'
-    );
+    const [formulaInput, setFormulaInput] = useState<string>('sum({a}) / len({a})');
     const [result, setResult] = useState<string>();
 
     return (
@@ -56,9 +53,7 @@ export const TryIt: React.FC = () => {
                 <Editor
                     value={jsonInput}
                     onValueChange={setJsonInput}
-                    highlight={(code) =>
-                        highlight(code, languages.json, 'json')
-                    }
+                    highlight={(code) => highlight(code, languages.json, 'json')}
                     padding={10}
                     style={{
                         fontFamily: '"Fira code", "Fira Mono", monospace',
@@ -76,30 +71,14 @@ export const TryIt: React.FC = () => {
                         fontSize: 12,
                     }}
                 />
-                <button
-                    onClick={() =>
-                        setResult(
-                            calculator
-                                .calculate(formulaInput, JSON.parse(jsonInput))
-                                .toString()
-                        )
-                    }
-                >
-                    Calculate
-                </button>
+                <button onClick={() => setResult(calculator.calculate(formulaInput, JSON.parse(jsonInput)).toString())}>Calculate</button>
                 {result && <div>Result: {result}</div>}
             </section>
             <section>
                 <h1>Functions Included for Demo</h1>
                 {Object.keys(functions).map((functionName) => {
-                    if (
-                        Object.prototype.hasOwnProperty.call(
-                            functions,
-                            functionName
-                        )
-                    ) {
-                        const functionString =
-                            functions[functionName].toString();
+                    if (Object.prototype.hasOwnProperty.call(functions, functionName)) {
+                        const functionString = functions[functionName].toString();
                         return (
                             <details key={functionName}>
                                 <summary>{functionName}</summary>

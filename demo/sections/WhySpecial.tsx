@@ -38,16 +38,11 @@ const functions: CustomFunctions = {
     },
 };
 
-const calculator = new JSFormulaCalculator();
-calculator.setFunctions(functions);
+const calculator = new JSFormulaCalculator({ functions });
 
 export const WhySpecial: React.FC = () => {
-    const [jsonInput, setJsonInput] = useState<string>(
-        '{"x":5,"y":{"z":20, "t":{"q":3}}}'
-    );
-    const [formulaInput, setFormulaInput] = useState<string>(
-        'pow({x},{y.t.q}) + {x} - {y.z} / {y.t.q}'
-    );
+    const [jsonInput, setJsonInput] = useState<string>('{"x":5,"y":{"z":20, "t":{"q":3}}}');
+    const [formulaInput, setFormulaInput] = useState<string>('pow({x},{y.t.q}) + {x} - {y.z} / {y.t.q}');
     const [result, setResult] = useState<string>();
     const [error, setError] = useState<string>();
 
@@ -79,13 +74,7 @@ export const WhySpecial: React.FC = () => {
             cachedTime = end - start;
 
             setError(undefined);
-            setResult(
-                'Uncached time: ' +
-                    uncachedTime +
-                    ' milliseconds, cached time: ' +
-                    cachedTime +
-                    ' milliseconds'
-            );
+            setResult('Uncached time: ' + uncachedTime + ' milliseconds, cached time: ' + cachedTime + ' milliseconds');
         } catch (err) {
             if (err instanceof Error) {
                 setError(err.message);
@@ -100,20 +89,16 @@ export const WhySpecial: React.FC = () => {
         <section id="why-special">
             <h1>Why is JS Formula special?</h1>
             <p>
-                What sets JS Formula appart from other JavaScript formula
-                evaluators is how it evaluates the formula. JS Formula does not
-                just simply evaluate formula's, but instead builds a Formula
-                object that can be traversed and evaluated. By taking this
-                approach, the Formula object can be cached, which provides
-                significant performance increase the next time the same formula
+                What sets JS Formula appart from other JavaScript formula evaluators is how it evaluates the formula. JS Formula does not
+                just simply evaluate formula's, but instead builds a Formula object that can be traversed and evaluated. By taking this
+                approach, the Formula object can be cached, which provides significant performance increase the next time the same formula
                 string is asked to be evaluated, even with different objects.
             </p>
             <h2>Compare Your Self!</h2>
             <p>
-                The function you enter here will be evaluate 10,000 times by
-                both the uncached version and the cached version. It will then
-                output how long it took to evaluate the 10,000 formulas for each
-                version. The functions in the previous demo are still available.
+                The function you enter here will be evaluate 10,000 times by both the uncached version and the cached version. It will then
+                output how long it took to evaluate the 10,000 formulas for each version. The functions in the previous demo are still
+                available.
             </p>
             <b>JSON Object</b>
             <Editor
