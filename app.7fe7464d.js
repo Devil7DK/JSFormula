@@ -126,8 +126,9 @@ const functions = {
     return total;
   }
 };
-const calculator = new index_1.JSFormulaCalculator();
-calculator.setFunctions(functions);
+const calculator = new index_1.JSFormulaCalculator({
+  functions
+});
 exports.TryIt = () => {
   const [jsonInput, setJsonInput] = react_1.useState('{"a":[1,2,3,4]}');
   const [formulaInput, setFormulaInput] = react_1.useState('sum({a}) / len({a})');
@@ -156,7 +157,7 @@ exports.TryIt = () => {
     }
   }), react_1d.default.createElement("button", {
     onClick: () => setResult(calculator.calculate(formulaInput, JSON.parse(jsonInput)).toString())
-  }, "\n                    Calculate\n                "), result && react_1d.default.createElement("div", null, "Result: ", result)), react_1d.default.createElement("section", null, react_1d.default.createElement("h1", null, "Functions Included for Demo"), Object.keys(functions).map(functionName => {
+  }, "Calculate"), result && react_1d.default.createElement("div", null, "Result: ", result)), react_1d.default.createElement("section", null, react_1d.default.createElement("h1", null, "Functions Included for Demo"), Object.keys(functions).map(functionName => {
     if (Object.prototype.hasOwnProperty.call(functions, functionName)) {
       const functionString = functions[functionName].toString();
       return react_1d.default.createElement("details", {
@@ -208,8 +209,9 @@ const functions = {
     return total;
   }
 };
-const calculator = new index_1.JSFormulaCalculator();
-calculator.setFunctions(functions);
+const calculator = new index_1.JSFormulaCalculator({
+  functions
+});
 exports.WhySpecial = () => {
   const [jsonInput, setJsonInput] = react_1.useState('{"x":5,"y":{"z":20, "t":{"q":3}}}');
   const [formulaInput, setFormulaInput] = react_1.useState('pow({x},{y.t.q}) + {x} - {y.z} / {y.t.q}');
@@ -248,7 +250,7 @@ exports.WhySpecial = () => {
   };
   return react_1d.default.createElement("section", {
     id: "why-special"
-  }, react_1d.default.createElement("h1", null, "Why is JS Formula special?"), react_1d.default.createElement("p", null, "\n                What sets JS Formula appart from other JavaScript formula\n                evaluators is how it evaluates the formula. JS Formula does not\n                just simply evaluate formula's, but instead builds a Formula\n                object that can be traversed and evaluated. By taking this\n                approach, the Formula object can be cached, which provides\n                significant performance increase the next time the same formula\n                string is asked to be evaluated, even with different objects.\n            "), react_1d.default.createElement("h2", null, "Compare Your Self!"), react_1d.default.createElement("p", null, "\n                The function you enter here will be evaluate 10,000 times by\n                both the uncached version and the cached version. It will then\n                output how long it took to evaluate the 10,000 formulas for each\n                version. The functions in the previous demo are still available.\n            "), react_1d.default.createElement("b", null, "JSON Object"), react_1d.default.createElement(react_simple_code_editor_1d.default, {
+  }, react_1d.default.createElement("h1", null, "Why is JS Formula special?"), react_1d.default.createElement("p", null, "\n                What sets JS Formula appart from other JavaScript formula evaluators is how it evaluates the formula. JS Formula does not\n                just simply evaluate formula's, but instead builds a Formula object that can be traversed and evaluated. By taking this\n                approach, the Formula object can be cached, which provides significant performance increase the next time the same formula\n                string is asked to be evaluated, even with different objects.\n            "), react_1d.default.createElement("h2", null, "Compare Your Self!"), react_1d.default.createElement("p", null, "\n                The function you enter here will be evaluate 10,000 times by both the uncached version and the cached version. It will then\n                output how long it took to evaluate the 10,000 formulas for each version. The functions in the previous demo are still\n                available.\n            "), react_1d.default.createElement("b", null, "JSON Object"), react_1d.default.createElement(react_simple_code_editor_1d.default, {
     value: jsonInput,
     onValueChange: setJsonInput,
     highlight: code => prismjs_1.highlight(code, prismjs_1.languages.json, 'json'),
@@ -278,8 +280,8 @@ var Builder_1 = __fusereq(24);
 var Evaluator_1 = __fusereq(25);
 var types_1 = __fusereq(26);
 class JSFormulaCalculator {
-  constructor() {
-    this.builder = new Builder_1.Builder();
+  constructor(options) {
+    this.builder = new Builder_1.Builder(options);
     this.evaluator = new Evaluator_1.Evaluator();
   }
   calculate(input, object) {
@@ -292,44 +294,33 @@ class JSFormulaCalculator {
       return this.evaluator.evalTree(tree, object);
     };
   }
-  setFunctions(newFunctions) {
-    this.builder.setFunctions(newFunctions);
-  }
 }
 exports.JSFormulaCalculator = JSFormulaCalculator;
 exports.CustomFunctions = types_1.CustomFunctions;
 
 },
 24: function(__fusereq, exports, module){
+var _1_;
+var _2_;
+var _3_;
+var _4_;
 exports.__esModule = true;
 var enums_1 = __fusereq(27);
 var Operators_1 = __fusereq(28);
 var Utils_1 = __fusereq(29);
 class Builder {
-  constructor() {
-    this.functions = {};
-    this.functionRegex = null;
-    this.variableOpen = '{';
-    this.variableEnd = '}';
-    this.variableRegex = new RegExp('^' + this.variableOpen + '.*?' + this.variableEnd);
-    this.opporatorRegex = /^\+|^-|^\/|^\*|^\^/;
-    this.cacheEnabled = true;
+  constructor(options) {
+    this.cacheEnabled = ((_1_ = options) === null || _1_ === void 0 ? void 0 : _1_.cache) || true;
+    this.functions = ((_2_ = options) === null || _2_ === void 0 ? void 0 : _2_.functions) || ({});
+    this.variableOpen = ((_3_ = options) === null || _3_ === void 0 ? void 0 : _3_.variableOpen) || '{';
+    this.variableEnd = ((_4_ = options) === null || _4_ === void 0 ? void 0 : _4_.variableEnd) || '}';
     this.cache = {};
-  }
-  setFunctions(newFunctions) {
-    const functionRegexs = [];
-    let regexString;
-    this.functions = newFunctions;
-    for (const prop in this.functions) {
-      if (Object.prototype.hasOwnProperty.call(this.functions, prop)) {
-        functionRegexs.push('^' + prop + '\\(');
-      }
-    }
-    if (!functionRegexs) {
-      this.functionRegex = null;
+    this.opporatorRegex = /^\+|^-|^\/|^\*|^\^/;
+    this.variableRegex = new RegExp('^' + this.variableOpen + '.*?' + this.variableEnd);
+    if (Object.keys(this.functions).length > 0) {
+      this.functionRegex = new RegExp(Object.keys(this.functions).map(name => `^${name}\\(`).join('|'));
     } else {
-      regexString = functionRegexs.join('|');
-      this.functionRegex = new RegExp(regexString);
+      this.functionRegex = null;
     }
   }
   tokenize(input) {
@@ -543,11 +534,12 @@ exports.Evaluator = Evaluator;
 exports.__esModule = true;
 Object.assign(exports, __fusereq(30));
 Object.assign(exports, __fusereq(31));
+Object.assign(exports, __fusereq(32));
 
 },
 27: function(__fusereq, exports, module){
 exports.__esModule = true;
-Object.assign(exports, __fusereq(32));
+Object.assign(exports, __fusereq(33));
 
 },
 28: function(__fusereq, exports, module){
@@ -659,6 +651,8 @@ exports.findClosingParan = findClosingParan;
 31: function(__fusereq, exports, module){
 },
 32: function(__fusereq, exports, module){
+},
+33: function(__fusereq, exports, module){
 var TokenType;
 (function (TokenType) {
   TokenType[TokenType["FUNC"] = 1] = "FUNC"
@@ -670,4 +664,4 @@ exports.TokenType = TokenType;
 
 }
 })
-//# sourceMappingURL=app.7a7c76e0.js.map
+//# sourceMappingURL=app.7fe7464d.js.map
