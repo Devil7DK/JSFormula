@@ -39,6 +39,23 @@ const functions: CustomFunctions = {
 };
 
 const calculator = new JSFormulaCalculator({ functions });
+const obj = { a: { x: 10, y: 5 }, b: { x: 20, y: 2 } };
+console.log(calculator.calculate('{a.x} * {a.y} + {b.x} / {b.y}', obj));
+
+{
+    const customFunctions = {
+        sin: function (x) {
+            return Math.sin(x);
+        },
+        pow: function (x, y) {
+            return Math.pow(x, y);
+        },
+    };
+
+    const calculator = new JSFormulaCalculator({ functions: customFunctions });
+    console.log(calculator.calculate('pow(5,2)'));
+    console.log(calculator.calculate('sin(25)'));
+}
 
 export const TryIt: React.FC = () => {
     const [jsonInput, setJsonInput] = useState<string>('{"a":[1,2,3,4]}');

@@ -1,4 +1,4 @@
-export * from './HowToUse';
+export * from './GettingStarted';
 export * from './Intro';
 export * from './ReusableFunctions';
 export * from './TryIt';
